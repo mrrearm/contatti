@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Rearm - Contact</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Orbitron', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .form-wrapper {
+            background: rgba(0, 20, 40, 0.95);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1a237e;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(26, 35, 126, 0.5);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #1a237e;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: #1a237e;
+            border: 2px solid #3949ab;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #00d4ff;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9fa8da;
+            opacity: 0.8;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #3949ab, #00d4ff);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #00d4ff, #3949ab);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            display: none;
+        }
+        
+        .status-message.loading {
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .status-message.success {
+            background: rgba(0, 255, 127, 0.2);
+            border: 2px solid #00ff7f;
+            color: #00ff7f;
+        }
+        
+        .status-message.error {
+            background: rgba(255, 0, 127, 0.2);
+            border: 2px solid #ff007f;
+            color: #ff007f;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-wrapper {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                padding: 15px;
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-wrapper {
+                padding: 25px 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-group label {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            .form-group textarea {
+                min-height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <h1 class="title">Mr Rearm</h1>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" placeholder="Scrivi il tuo messaggio qui..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Trasmetti Messaggio
+                </button>
+                
+                <div id="statusMessage" class="status-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const timestamp = new Date().toISOString();
+            const statusMessage = document.getElementById('statusMessage');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Disabilita il pulsante durante l'invio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Trasmissione...';
+            
+            // Mostra messaggio di invio
+            statusMessage.textContent = 'Trasmissione in corso...';
+            statusMessage.className = 'status-message loading';
+            statusMessage.style.display = 'block';
+            
+            // Crea un form temporaneo per l'invio
+            const tempForm = document.createElement('form');
+            tempForm.method = 'POST';
+            tempForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLScZjVRgrd6eFFVMMQmE93hE420ActpA0jC0RfC4c2qLCLhifg/formResponse';
+            tempForm.target = 'submitIframe';
+            tempForm.style.display = 'none';
+            
+            // Crea i campi del form
+            const emailField = document.createElement('input');
+            emailField.type = 'hidden';
+            emailField.name = 'entry.1480630571';
+            emailField.value = email;
+            tempForm.appendChild(emailField);
+            
+            const messageField = document.createElement('input');
+            messageField.type = 'hidden';
+            messageField.name = 'entry.1652345182';
+            messageField.value = message;
+            tempForm.appendChild(messageField);
+            
+            const timestampField = document.createElement('input');
+            timestampField.type = 'hidden';
+            timestampField.name = 'entry.421861717';
+            timestampField.value = timestamp;
+            tempForm.appendChild(timestampField);
+            
+            // Crea l'iframe per la risposta
+            const iframe = document.createElement('iframe');
+            iframe.name = 'submitIframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Aggiungi il form al body e invialo
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+            
+            // Simula il successo dopo 2 secondi (Google Forms sempre restituisce successo)
+            setTimeout(() => {
+                statusMessage.textContent = 'Messaggio trasmesso! Reindirizzamento...';
+                statusMessage.className = 'status-message success';
+                
+                // Pulisci il DOM
+                document.body.removeChild(tempForm);
+                document.body.removeChild(iframe);
+                
+                // Reindirizza alla pagina di ringraziamento dopo 1.5 secondi
+                setTimeout(() => {
+                    window.location.href = 'grazie.html';
+                }, 1500);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
